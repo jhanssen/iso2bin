@@ -33,6 +33,13 @@ for (let i = 0; i < pad; ++i) {
     }
 }
 
+// bin files have a 16 byte header
+num = fs.writeSync(outf, buf, 0, 16);
+if (num != 16) {
+    console.error("wrote", num);
+    process.exit(1);
+}
+
 for (;;) {
     try {
         num = fs.readSync(inf, buf, 0, 2048, off);
